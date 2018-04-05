@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.example.huongthutran.moneymoney.AddMoneyActivity">
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outcome"
+            android:id="@+id/rbtnOutcome"
+            android:checked="true" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Income"
+            android:id="@+id/rbtnIncome"
+            android:checked="false"
+            />
+
+    </RadioGroup>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/edtAmount"
+        android:inputType="number"
+        android:hint="đ"
+        android:textSize="25dp"
+    />
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/spnContaint"
+        android:background="@color/spiner_color"
+        ></Spinner>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/edtNote"
+        android:hint="ghi chú"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Thời gian"
+        android:id="@+id/edtDate"
+        android:inputType="date"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvError"
+        android:padding="10dp"
+        android:textColor="@color/redColor"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addNewbtn"
+            android:text="ADD"
+            android:textColor="#fff"
+            android:layout_margin="20dp"
+            android:background="@color/colorAccent"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Canclebtn"
+            android:text="Cancle"
+            android:layout_margin="20dp"
+            android:background="@color/spiner_color"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    android:layout_margin="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/imgMoney"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/bill_icon"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="0.7"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDate_Money"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="date"
+            />
+
+        <TextView
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNote_Money"
+            android:textSize="15dp"
+            android:text="note: Water"
+            android:textColor="@color/grey"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAmount_Money"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_weight="1"
+        android:text="200000"
+        android:textSize="20dp"
+        android:textColor="@color/redColor"
+        android:gravity="right|center_vertical" />
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#076856</color>
+    <color name="colorPrimaryDark">#065143</color>
+    <color name="colorAccent">#E4572E</color>
+    <color name="redColor">#D60000</color>
+    <color name="black">#000</color>
+    <color name="grey">#5F6D64</color>
+    <color name="spiner_color">#F7F7F7</color>
+</resources>

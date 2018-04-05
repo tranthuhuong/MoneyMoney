@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:gravity="right|top"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="21dp"
+        android:layout_height="22dp"
+        android:background="#fff"
+        android:gravity="right|top"
+        android:text="x"
+        android:id="@+id/close"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OVERVIEW"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:padding="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+
+            android:text="Income:"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="212155đ"
+            android:id="@+id/tvMoneyIncome"
+            android:textColor="#5497BF"
+            android:textSize="17dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Outcome:"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="212155đ"
+            android:id="@+id/tvMoneyOutcome"
+            android:textColor="@color/redColor"
+            android:textSize="17dp"
+            android:textStyle="normal"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text=""
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="212155đ"
+            android:textColor="@color/black"
+            android:id="@+id/tvMoney"
+            android:textSize="27dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+</LinearLayout>
