@@ -195,10 +195,13 @@ public class Dialog_Filter {
         edtDay.setVisibility(View.GONE);
     }
     public void setListWeek() {
-
+        Calendar cal = Calendar.getInstance();
+        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        cal.set(Calendar.WEEK_OF_YEAR, week);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 
         String currentDateandTime = format.format(Calendar.getInstance().getTime());
-        String dateBegin="2018-04-05";
+        String dateBegin=format.format(cal.getTime());
         for(int i=0;i<5;i++){
             Date now = null;
             try {

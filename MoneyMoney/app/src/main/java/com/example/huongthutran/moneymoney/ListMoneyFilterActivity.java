@@ -97,7 +97,6 @@ public class ListMoneyFilterActivity extends AppCompatActivity {
                 httpURLConnection.connect();
                 inputStream=httpURLConnection.getInputStream();
                 while ((c=inputStream.read())!=-1) {
-                    //Log.d("Test", c+"");
                     result += (char) c;
                 }
 

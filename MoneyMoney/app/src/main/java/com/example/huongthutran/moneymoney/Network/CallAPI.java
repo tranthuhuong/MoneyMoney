@@ -5,6 +5,6 @@ package com.example.huongthutran.moneymoney.Network;
  */
 
 public class CallAPI {
-    public static String urlServer = "http://192.168.1.107/";
+    public static String urlServer = "http://192.168.95.99:9000/";
     public static String urlMoney = urlServer + "api/Money";
 }
