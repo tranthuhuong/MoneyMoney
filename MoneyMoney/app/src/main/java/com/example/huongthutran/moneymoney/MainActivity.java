@@ -1,5 +1,6 @@
 package com.example.huongthutran.moneymoney;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             monies.add(moneyGetResult);
             moneyAdapter.notifyDataSetChanged();
             updateIn_Outcome();
+            Toast.makeText(MainActivity.this,"Add new Money is successfull!",Toast.LENGTH_SHORT).show();
         }
         if (resultCode == RESULT_OK && requestCode == 204 && data != null) {
             monies.clear();

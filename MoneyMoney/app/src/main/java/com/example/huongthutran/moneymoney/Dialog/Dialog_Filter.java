@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.huongthutran.moneymoney.AddMoneyActivity;
 import com.example.huongthutran.moneymoney.ListMoneyFilterActivity;
 import com.example.huongthutran.moneymoney.MainActivity;
 import com.example.huongthutran.moneymoney.Model.Money;
@@ -91,10 +92,8 @@ public class Dialog_Filter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(rbtnSeason.isChecked()){
-                    spinerVisible();
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, seasons);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spinerFilter.setAdapter(adapter);
+
+                    setSpiner(seasons);
                 }
             }
         });
@@ -102,10 +101,7 @@ public class Dialog_Filter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(rbtnMonth.isChecked()){
-                    spinerVisible();
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, months);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spinerFilter.setAdapter(adapter);
+                    setSpiner(months);
                 }
 
             }
@@ -114,10 +110,7 @@ public class Dialog_Filter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(rbtnWeekFilter.isChecked()){
-                    spinerVisible();
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, weeks);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spinerFilter.setAdapter(adapter);
+                    setSpiner(weeks);
                 }
             }
         });
@@ -125,10 +118,7 @@ public class Dialog_Filter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(rbtnYear.isChecked()){
-                    spinerVisible();
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, years);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spinerFilter.setAdapter(adapter);
+                    setSpiner(years);
                 }
             }
         });
@@ -273,4 +263,11 @@ public class Dialog_Filter {
             }
         }
     }
+    public void setSpiner(String[] a){
+        spinerVisible();
+        ArrayAdapter<String>  adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, a);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinerFilter.setAdapter(adapter);
+    }
+
 }

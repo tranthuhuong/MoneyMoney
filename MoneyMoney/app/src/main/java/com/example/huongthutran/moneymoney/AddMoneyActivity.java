@@ -62,18 +62,15 @@ public class AddMoneyActivity extends AppCompatActivity {
         money = (Money) getIntent().getExtras().getSerializable("MONEY");
         contentOutcome = new String[]{"Bills & Utiltites", "Food & Beverage", "Transportation", "Shopping", "Friend & Lover", "Health & Fitness", "Education", "Others"};
         contentIncome = new String[]{"Salary","Others"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        spnContaint.setAdapter(adapter);
+        //set Spiner
+        setSpiner(contentOutcome);
 
         spnContaint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cont[0] = spnContaint.getSelectedItem().toString();
                 //Log.d("Test Spinnert", cont[0]);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -83,19 +80,14 @@ public class AddMoneyActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (rbtnIncome.isChecked() == true) {
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spnContaint.setAdapter(adapter);
-
+                    setSpiner(contentIncome);
                 } else {
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentOutcome);
-                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                    spnContaint.setAdapter(adapter);
+                    setSpiner(contentOutcome);
                 }
 
             }
         });
+
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,14 +140,10 @@ public class AddMoneyActivity extends AppCompatActivity {
             edtDate.setText(money.getDate());
             if (money.getContentM().equals("income") ) {
                 rbtnIncome.setChecked(true);
-                adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
-                adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                spnContaint.setAdapter(adapter);
+                setSpiner(contentIncome);
             } else {
                 rbtnOutcome.isChecked();
-                adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentOutcome);
-                adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                spnContaint.setAdapter(adapter);
+                setSpiner(contentOutcome);
             }
             btnAddMoney.setText("SAVE");
             btnAddMoney.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +191,13 @@ public class AddMoneyActivity extends AppCompatActivity {
 
             });
         }
+
+
+    }
+    public void setSpiner(String[] a){
+        ArrayAdapter<String>  adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, a);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spnContaint.setAdapter(adapter);
     }
         private class DoPost extends AsyncTask<String, Void, Integer> {
             @Override
@@ -274,6 +269,7 @@ public class AddMoneyActivity extends AppCompatActivity {
         }
 
     }
+
     private class DoUpdate extends AsyncTask<String,Void,Integer>{
         @Override
         protected Integer doInBackground(String... strings) {
@@ -327,7 +323,6 @@ public class AddMoneyActivity extends AppCompatActivity {
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         dialogInterface.dismiss();
                         dialogInterface.dismiss();
                         Intent intent = new Intent(AddMoneyActivity.this, MainActivity.class);
