@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ListMoneyFilterActivity extends AppCompatActivity {
     ListView listViewMoneyFilter;
-    TextView tvIncome,tvOutcome,tvMoney,tvtitle;
+    TextView tvIncome,tvOutcome,tvMoney,tvtitle,tvTitleOuttcome,tvTitleIncome;
     List<Money> monies=new ArrayList<>();
     MoneyAdapter moneyAdapter;
 
@@ -40,11 +40,32 @@ public class ListMoneyFilterActivity extends AppCompatActivity {
         listViewMoneyFilter=findViewById(R.id.listViewMoneyFilter);
         tvIncome=findViewById(R.id.tvMoneyIncomeFilter);
         tvOutcome=findViewById(R.id.tvMoneyOutcomeFilter);
-
+        tvTitleOuttcome=findViewById(R.id.tvTitleOuttcome);
+        tvTitleIncome=findViewById(R.id.tvTitleIncome);
         tvtitle=findViewById(R.id.tvtitle);
         tvMoney=findViewById(R.id.tvMoneyFilter);
         String URL = getIntent().getExtras().getString("URL");
         String title = getIntent().getExtras().getString("TITLE");
+        String type = getIntent().getExtras().getString("TYPE");
+        if(type.trim().equals("income")){
+            tvMoney.setVisibility(View.GONE);
+            tvOutcome.setVisibility(View.GONE);
+            tvTitleOuttcome.setVisibility(View.GONE);
+            tvIncome.setVisibility(View.VISIBLE);
+            tvTitleIncome.setVisibility(View.VISIBLE);
+            tvTitleIncome.setTextSize(20);
+            tvIncome.setTextSize(30);
+        } else{
+            if(type.trim().equals("outcome")){
+                tvMoney.setVisibility(View.GONE);
+                tvIncome.setVisibility(View.GONE);
+                tvTitleIncome.setVisibility(View.GONE);
+                tvTitleOuttcome.setVisibility(View.VISIBLE);
+                tvOutcome.setVisibility(View.VISIBLE);
+                tvTitleOuttcome.setTextSize(20);
+                tvOutcome.setTextSize(30);
+            }
+        }
         tvtitle.setText(title);
         new DoGet().execute(URL);
         listViewMoneyFilter.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -61,10 +82,10 @@ public class ListMoneyFilterActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             // super.onPostExecute(integer);
             if(integer==500){
-                Log.d("Test", "Thất bại");
+                Log.d("Test", "ERROR");
 
             } else{
-                Log.d("Test", "Thành công");
+                Log.d("Test", ":3");
                 tvMoney.setText(income-outcome+"");
                 tvOutcome.setText(outcome+"");
                 tvIncome.setText(income+"");

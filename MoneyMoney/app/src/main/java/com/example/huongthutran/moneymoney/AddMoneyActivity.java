@@ -54,20 +54,24 @@ public class AddMoneyActivity extends AppCompatActivity {
         btnAddMoney = findViewById(R.id.addNewbtn);
         btnCancle = findViewById(R.id.Canclebtn);
         tvError = findViewById(R.id.tvError);
-        final String content[];
+        final String contentOutcome[],contentIncome[];
+
         final String[] cont = {""};
         //
         String method = getIntent().getExtras().getString("METHOD");
         money = (Money) getIntent().getExtras().getSerializable("MONEY");
-        content = new String[]{"Bills & Utiltites", "Food & Beverage", "Transportation", "Shopping", "Friend & Lover", "Health & Fitness", "Education", "Other"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, content);
+        contentOutcome = new String[]{"Bills & Utiltites", "Food & Beverage", "Transportation", "Shopping", "Friend & Lover", "Health & Fitness", "Education", "Others"};
+        contentIncome = new String[]{"Salary","Others"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         spnContaint.setAdapter(adapter);
+
         spnContaint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                cont[0] = content[i].toString();
+                cont[0] = spnContaint.getSelectedItem().toString();
+                //Log.d("Test Spinnert", cont[0]);
             }
 
             @Override
@@ -79,8 +83,16 @@ public class AddMoneyActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (rbtnIncome.isChecked() == true) {
-                    spnContaint.setEnabled(false);
-                } else spnContaint.setEnabled(true);
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                    spnContaint.setAdapter(adapter);
+
+                } else {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentOutcome);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                    spnContaint.setAdapter(adapter);
+                }
 
             }
         });
@@ -104,11 +116,11 @@ public class AddMoneyActivity extends AppCompatActivity {
                         int id = randomNumber();
                         String type = "", contentM = "", note = "", amount = "";
                         String date = "";
+                        contentM = cont[0];
                         if (rbtnIncome.isChecked()) {
                             type = "income"; //type
-                            contentM = "Salary"; //content
                         } else {
-                            contentM = cont[0];
+
                             type = "outcome";
                         }
 
@@ -134,12 +146,16 @@ public class AddMoneyActivity extends AppCompatActivity {
             edtNote.setText(money.getNote());
             edtAmount.setText(money.getAmount() + "");
             edtDate.setText(money.getDate());
-            if (money.getContentM() == "income") {
+            if (money.getContentM().equals("income") ) {
                 rbtnIncome.setChecked(true);
-                spnContaint.setEnabled(true);
+                adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentIncome);
+                adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                spnContaint.setAdapter(adapter);
             } else {
                 rbtnOutcome.isChecked();
-                spnContaint.setEnabled(false);
+                adapter = new ArrayAdapter<String>(AddMoneyActivity.this, android.R.layout.simple_spinner_item, contentOutcome);
+                adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                spnContaint.setAdapter(adapter);
             }
             btnAddMoney.setText("SAVE");
             btnAddMoney.setOnClickListener(new View.OnClickListener() {
@@ -156,11 +172,10 @@ public class AddMoneyActivity extends AppCompatActivity {
                             format.parse(edtDate.getText().toString());
                             String type = "", contentM = "", note = "", amount = "";
                             String date = "";
+                            contentM = cont[0];
                             if (rbtnIncome.isChecked()) {
                                 type = "income"; //type
-                                contentM = "Salary"; //content
                             } else {
-                                contentM = cont[0];
                                 type = "outcome";
                             }
 

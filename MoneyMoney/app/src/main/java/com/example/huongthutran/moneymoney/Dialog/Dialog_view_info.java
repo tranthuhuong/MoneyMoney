@@ -121,7 +121,7 @@ public class Dialog_view_info {
                 imageView.setImageResource(R.drawable.income_money);
                 break;
             case "Orther":
-                imageView.setImageResource(R.drawable.income_money);
+                imageView.setImageResource(R.drawable.other_icon);
                 break;
         }
         tvAmountInfo.setText(money.getAmount()+"");

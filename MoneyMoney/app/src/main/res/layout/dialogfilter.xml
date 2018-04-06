@@ -12,20 +12,25 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20dp"
         />
-
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/grouprbtn"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
+        <RadioGroup
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/grouprbtn"
+
+            android:orientation="vertical"
+            >
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Day"
                 android:id="@+id/rbtnDateFilter"
-            />
+                />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +56,29 @@
                 android:text="Year"
                 android:id="@+id/rbtnYearFilter"
                 />
-    </RadioGroup>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="income"
+                android:id="@+id/checkboxIncome"
+                android:layout_marginBottom="20dp"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outcome"
+                android:id="@+id/checkboxOutcome"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

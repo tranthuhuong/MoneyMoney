@@ -100,6 +100,9 @@ public class MoneyAdapter  extends BaseAdapter implements Filterable {
             case "Salary":
                 imageView.setImageResource(R.drawable.income_money);
                 break;
+            case "Others":
+                imageView.setImageResource(R.drawable.other_icon);
+                break;
         }
         return view;
     }

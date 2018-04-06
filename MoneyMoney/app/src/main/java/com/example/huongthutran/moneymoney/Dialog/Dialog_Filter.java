@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -47,7 +48,12 @@ public class Dialog_Filter {
     RadioButton rbtnWeekFilter,rbtnMonth,rbtnYear,rbtnSeason,rbtnDay;
     Button btnOk;
     Spinner spinerFilter;
-    final String[] weeks = new String[5];
+    CheckBox checkboxIncome,checkboxOutcome;
+    private static final int quatity = 5;
+    final String[] weeks = new String[quatity];
+    String[] months=new String[quatity];
+    String[] years=new String[quatity];
+    String[] seasons=new String[quatity];
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Dialog_Filter(final Context context){
         this.context=context;
@@ -56,6 +62,8 @@ public class Dialog_Filter {
         dialog.setContentView(R.layout.dialogfilter);
         dialog.show();
         btnOk=dialog.findViewById(R.id.btnOkFiler);
+        checkboxIncome=dialog.findViewById(R.id.checkboxIncome);
+        checkboxOutcome=dialog.findViewById(R.id.checkboxOutcome);
         edtDay=dialog.findViewById(R.id.edtDay);
         rbtnWeekFilter=dialog.findViewById(R.id.rbtnWeekFilter);
         rbtnMonth=dialog.findViewById(R.id.rbtnMonthFilter);
@@ -66,10 +74,8 @@ public class Dialog_Filter {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.MONTH+1);
         final int year= calendar.get(Calendar.YEAR);
-        final String[] months = new String[]{"4 - 2018","3 - 2018","2 - 2018","1 - 2018","12 - 2017","11 - 2017"};
-        final String[] years = new String[]{"2017","2018"};
-        final String[] seasons = new String[]{"2 - 2018","1 - 2018","4 - 2017","3 - 2017"};
-        setListWeek();
+
+        setListAll();
         final String[] strFilter = new String[1];
 
         rbtnDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -87,6 +93,7 @@ public class Dialog_Filter {
                 if(rbtnSeason.isChecked()){
                     spinerVisible();
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, seasons);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
                     spinerFilter.setAdapter(adapter);
                 }
             }
@@ -97,6 +104,7 @@ public class Dialog_Filter {
                 if(rbtnMonth.isChecked()){
                     spinerVisible();
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, months);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
                     spinerFilter.setAdapter(adapter);
                 }
 
@@ -108,6 +116,7 @@ public class Dialog_Filter {
                 if(rbtnWeekFilter.isChecked()){
                     spinerVisible();
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, weeks);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
                     spinerFilter.setAdapter(adapter);
                 }
             }
@@ -118,6 +127,7 @@ public class Dialog_Filter {
                 if(rbtnYear.isChecked()){
                     spinerVisible();
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, years);
+                    adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
                     spinerFilter.setAdapter(adapter);
                 }
             }
@@ -142,13 +152,26 @@ public class Dialog_Filter {
             public void onClick(View view) {
                 Intent i = new Intent(context, ListMoneyFilterActivity.class);
                 Bundle mBundle = new Bundle();
+                String type;
+                String Url="";
+                if((checkboxIncome.isChecked()&&checkboxOutcome.isChecked())||(!checkboxIncome.isChecked()&&!checkboxOutcome.isChecked())){
+                    type="all";
+                    Url=CallAPI.urlMoney+"?";
+                } else if(checkboxOutcome.isChecked()){
+                    type="outcome";
+                    Url=CallAPI.urlMoney+"?type=outcome&";
+                } else {
+                    type="income";
+                    Url=CallAPI.urlMoney+"?type=income &";
+                }
+
                 if(rbtnDay.isChecked()){
                     String date=edtDay.getText().toString().trim();
-
                     try {
                         format.parse(date);
-                        mBundle.putString("URL", CallAPI.urlMoney+"?date="+date);
+                        mBundle.putString("URL",Url+"date="+date);
                         mBundle.putString("TITLE","Date: "+date);
+                        mBundle.putString("TYPE",type);
                         i.putExtras(mBundle);
                         context.startActivity(i);
                     } catch (ParseException e) {
@@ -157,28 +180,32 @@ public class Dialog_Filter {
                 }
                 if(rbtnWeekFilter.isChecked()){
                     String[] str=strFilter[0].split(" -- ");
-                    mBundle.putString("URL", CallAPI.urlMoney+"?week="+str[0]);
+                    mBundle.putString("URL", Url+"week="+str[0]);
                     mBundle.putString("TITLE","Week "+str[0]+" -- "+str[1]);
+                    mBundle.putString("TYPE",type);
                     i.putExtras(mBundle);
                     context.startActivity(i);
                 }
                 if(rbtnSeason.isChecked()){
                     String[] str=strFilter[0].split(" - ");
-                    mBundle.putString("URL", CallAPI.urlMoney+"?season="+str[0]+"&year="+str[1]);
+                    mBundle.putString("URL", Url+"season="+str[0]+"&year="+str[1]);
                     mBundle.putString("TITLE","Quarter "+str[0]+" - "+str[1]);
+                    mBundle.putString("TYPE",type);
                     i.putExtras(mBundle);
                     context.startActivity(i);
                 }
                 if(rbtnMonth.isChecked()){
                     String[] str=strFilter[0].split(" - ");
-                    mBundle.putString("URL", CallAPI.urlMoney+"?month="+str[0]+"&year="+str[1]);
+                    mBundle.putString("URL",Url+"month="+str[0]+"&year="+str[1]);
                     mBundle.putString("TITLE",getMonth(str[0])+" - "+str[1]);
+                    mBundle.putString("TYPE",type);
                     i.putExtras(mBundle);
                     context.startActivity(i);
                 }
                 if(rbtnYear.isChecked()){
-                    mBundle.putString("URL", CallAPI.urlMoney+"?year="+strFilter[0]);
+                    mBundle.putString("URL", Url+"year="+strFilter[0]);
                     mBundle.putString("TITLE",""+strFilter[0]);
+                    mBundle.putString("TYPE",type);
                     i.putExtras(mBundle);
                     context.startActivity(i);
                 }
@@ -194,7 +221,7 @@ public class Dialog_Filter {
         spinerFilter.setVisibility(View.VISIBLE);
         edtDay.setVisibility(View.GONE);
     }
-    public void setListWeek() {
+    public void setListAll() {
         Calendar cal = Calendar.getInstance();
         int week = cal.get(Calendar.WEEK_OF_YEAR);
         cal.set(Calendar.WEEK_OF_YEAR, week);
@@ -218,8 +245,32 @@ public class Dialog_Filter {
             dateBegin=date;
             Log.d("huong",date);
         }
-
-
-
+        int month = cal.get(Calendar.MONTH)+1;
+        int year=cal.get(Calendar.YEAR);
+        int season;
+        years  = new String[]{year+"",year-1+""};
+        if(month%3==0){
+            season=month/3;
+        } else season = (month/3)+1;
+        for(int i=0;i<quatity;i++){
+            months[i]=month+" - "+year;
+            seasons[i]=season+" - "+year;
+            if(month>1){
+                month--;
+            } else {
+                month=12;
+                year--;
+            }
+        }
+        year=cal.get(Calendar.YEAR);
+        for(int i=0;i<quatity;i++){
+            seasons[i]=season+" - "+year;
+            if(season>1){
+                season--;
+            } else {
+                season=4;
+                year--;
+            }
+        }
     }
 }
